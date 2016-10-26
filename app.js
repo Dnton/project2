@@ -43,9 +43,9 @@ app.use(session({
 
 app.use(methodOverride('_method'))
 
+require('./config/passport')(passport)
 app.use(passport.initialize())
 app.use(passport.session())
-
 app.use(flash())
 
 app.use(express.static(__dirname + '/public'))
@@ -58,8 +58,6 @@ var user = require('./routes/users')
 var user_api_routes = require('./routes/users_api')
 
 var post = require('./routes/posts')
-
-require('./config/passport')(passport)
 
 // app.use('/', home)
 app.use('/users', user)

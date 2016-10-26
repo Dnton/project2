@@ -19,8 +19,9 @@ router.get('/:id', function (req, res) {
   Post.findById({_id: req.params.id}, function (err, foundpost) {
     if (err) console.log(err)
 
-    Comment.find({post_id: req.params.id}, function (err, allComment) {
+    Comment.find({post: req.params.id}, function (err, allComment) {
       if (err) console.log(err)
+      console.log(allComment)
 
       res.render('posts/createdpost', {
         foundpost: foundpost,
@@ -29,6 +30,21 @@ router.get('/:id', function (req, res) {
     })
   })
 })
+
+// router.get('/:id', function (req, res) {
+//   Post.findById(req.params.id)
+//     .populate('user_id', 'name')
+//     .exec(function (err, foundPost) {
+//       if (err) console.log(err)
+//       Comment.find({post_id: req.params.id}, function (err, allComment) {
+//         if (err) console.log(err)
+//         res.render('posts/createdpost', {
+//           foundPost: foundPost,
+//           allComments: allComment
+//         })
+//       })
+//     })
+// })
 
 router.post('/', function (req, res) {
   var newPost = new Post({
@@ -46,8 +62,9 @@ router.post('/', function (req, res) {
 
 router.post('/:id', function (req, res) {
   var newComment = new Comment({
-    header: req.body.comment.name,
-    content: req.body.comment.content
+    name: req.body.comment.name,
+    content: req.body.comment.content,
+    post: req.params.id
   })
 
   newComment.save(function (err, newComment) {

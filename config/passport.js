@@ -14,17 +14,14 @@ module.exports = function (passport) {
   })
 
   passport.use('local-signup', new LocalStrategy({
-    usernameField: 'user[name]',
-    passwordField: 'user[password]',
+    usernameField: 'user[local][name]',
+    passwordField: 'user[local][password]',
     passReqToCallback: true
   }, function (req, email, password, next) {
-    console.log("hello world")
     // the authentication flow on our local auth routes
-    User.findOne({'email': email }, function (err, foundUser) {
+    User.findOne({'local.email': email }, function (err, foundUser) {
       // if user is found, dont create new user
       // if user is not found, create new user
-      console.log(foundUser)
-      console.log("something")
       if (err) return next(err)
 
       if (foundUser) {
@@ -39,17 +36,12 @@ module.exports = function (passport) {
   }))
 
   passport.use('local-login', new LocalStrategy({
-    usernameField: 'user[email]',
-    passwordField: 'user[password]',
+    usernameField: 'user[local][email]',
+    passwordField: 'user[local][password]',
     passReqToCallback: true
   }, function (req, email, password, next) {
-    console.log('authenticating with given email and password')
-    console.log(email, password)
-
-    User.findOne({ 'email': email }, function (err, foundUser) {
+    User.findOne({ 'local.email': email }, function (err, foundUser) {
       if (err) return next(err)
-
-    console.log(foundUser)
       // if cannot find use by email, return to route with flash message
       if (!foundUser)
         return next(null, false, req.flash('loginMessage', 'No user found with this email'))

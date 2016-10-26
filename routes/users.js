@@ -1,56 +1,53 @@
 var express = require('express')
 var router = express.Router()
+var passport = require('passport')
+// var LocalStrategy = require('passport-local').Strategy
 
 var User = require('../models/user')
+// var Property = require('../models/property')
 
-router.get('/', function (req, res){
-  User.find({}, function(err, allUsers) {
-    console.log(allUsers)
-    res.render('users/index', {
-      allUsers: allUsers
-    })
-  })
-})
-
-router.get('/login', function (req, res) {
-  res.render('users/login', { message: req.flash('loginMessage') })
-})
-
-router.post('/login', function (req, res) {
-  var user = req.body.user
-
-  User.findOne({ 'local.email': user.local.email }, function (err, foundUser) {
-    if (err) res.send(err.message)
-
-    if (foundUser) {
-      foundUser.authenticate(user.local.password, function (err, authenticated) {
-        if (err) res.send(err)
-
-        if (authenticated) {
-          res.redirect('/profile')
-        } else {
-          res.redirect('/login')
-        }
+function authCheck (req, res, next) {
+  if (req.isAuthenticated()) {
+    req.flash('profileMessage', 'You have already logged in.')
+    return res.redirect('/profile')
+  } else {
+    return next()
+  }
+}
+router.route('/signup')
+      .get(authCheck, function (req, res) {
+        User.find({}, function (err, allUsers) {
+          res.render('signup', {
+            allUsers: allUsers,
+            message: req.flash('signupMessage')
+          })
+        })
       })
-    } else {
-      // if application cannot find user by email
-      req.flash('loginMessage', 'Email not found!')
-      res.redirect('/login')
-    }
+      .post(passport.authenticate('local-signup', {
+        successRedirect: '/profile',
+        failureRedirect: '/signup',
+        failureFlash: true
+      }))
+
+router.route('/')
+      .get(authCheck, function (req, res) {
+        res.render('login', {message: req.flash('loginMessage')})
+      })
+      .post(passport.authenticate('local-login', {
+        successRedirect: '/profile',
+        failureRedirect: '/',
+        failureFlash: true
+      }))
+
+router.get('/user', function (req, res) {
+  res.render('user', {
+    message: req.flash('profileMessage'),
+    user: req.user
   })
 })
-
-router.get('/index', function(req, res) {
-  res.render('users/index')
-})
-
-
-router.get('/error', function (req, res) {
-  res.render('users/error')
-})
-
-router.get('/profile', function (req, res) {
-  res.render('users/profile')
+router.get('/logout', function (req, res) {
+  req.logout()
+  res.redirect('/')
 })
 
 module.exports = router
