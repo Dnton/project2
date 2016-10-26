@@ -9,15 +9,14 @@
           <input type="text" name="comment[name]" id="comment-name" placeholder="Your name" class="u-full-width">
         </div>
         <div class="six columns">
-          <input type="text" name="comment[comment]" id="posts-content" placeholder="Your comment" class="u-full-width">
+          <input type="text" name="comment[content]" id="posts-content" placeholder="Your comment" class="u-full-width">
         </div>
-        <input type="submit" value='Create New Post'>
+        <input type="submit" value='Comment'>
       </div>
   </form>
   </div>
 
-  <% allUsers.forEach(function(user) { %>
-    <li><%= user.local.name %></li>
-    <li><%= user.local.email %></li>
-    <li><%= user.local.password %></li>
+  <% allComments.forEach(function(comment) { %>
+    <li><%= comment.name %></li>
+    <li><%= comment.content %></li>
   <% }) %>

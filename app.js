@@ -64,7 +64,6 @@ require('./config/passport')(passport)
 // app.use('/', home)
 app.use('/users', user)
 app.use('/api/users', user_api_routes)
-
 app.use('/posts', post)
 
 app.listen(process.env.PORT || 3000)

@@ -7,7 +7,7 @@ var commentSchema = new mongoose.Schema({
       type: Date,
       default: Date.now
     },
-    comment: String,
+    content: String,
     post: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Post'

@@ -3,6 +3,8 @@ var router = express.Router()
 
 var Post = require('../models/post')
 
+var Comment = require('../models/comment')
+
 router.get('/', function (req, res) {
   Post.find({}, function (err, allPost) {
     if (err) console.log(err)
@@ -13,26 +15,20 @@ router.get('/', function (req, res) {
   })
 })
 
-// router.get('/:id', function (req, res) {
-//   Post.find({}, function (err, post) {
-//     if (err) console.log(err)
-//     console.log(post)
-//     res.render('posts/createdpost', {
-//       post: post
-//     })
-//   })
-// })
-
-
 router.get('/:id', function (req, res) {
   Post.findById({_id: req.params.id}, function (err, foundpost) {
     if (err) console.log(err)
 
+    Comment.find({post_id: req.params.id}, function (err, allComment) {
+      if (err) console.log(err)
+
       res.render('posts/createdpost', {
-        foundpost: foundpost
+        foundpost: foundpost,
+        allComments: allComment
       })
     })
   })
+})
 
 router.post('/', function (req, res) {
   var newPost = new Post({
@@ -46,9 +42,18 @@ router.post('/', function (req, res) {
 
     res.redirect('/posts/' + newPost.id)
   })
-//
-// res.render('/post/:id', {
-//   newPost: newPost
+})
+
+router.post('/:id', function (req, res) {
+  var newComment = new Comment({
+    header: req.body.comment.name,
+    content: req.body.comment.content
+  })
+
+  newComment.save(function (err, newComment) {
+    if (err) throw new Error(err)
+    res.redirect('/posts/' + req.params.id)
+  })
 })
 
 router.get('/error', function (req, res) {
