@@ -25,8 +25,8 @@ router.get('/:id', function (req, res) {
 
 router.post('/', function (req, res) {
   var newPost = new Post({
-    header: req.body.post.header,
-    content: req.body.post.content,
+    header: req.body.posts.header,
+    content: req.body.posts.content,
     // user: req.user.id
   })
 
