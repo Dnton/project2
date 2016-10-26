@@ -13,20 +13,31 @@ router.get('/', function (req, res) {
   })
 })
 
+// router.get('/:id', function (req, res) {
+//   Post.find({}, function (err, post) {
+//     if (err) console.log(err)
+//     console.log(post)
+//     res.render('posts/createdpost', {
+//       post: post
+//     })
+//   })
+// })
+
+
 router.get('/:id', function (req, res) {
-  Post.find({}, function (err, createdPost) {
+  Post.findById({_id: req.params.id}, function (err, foundpost) {
     if (err) console.log(err)
-    console.log(createdPost)
-    res.render('posts/createdpost', {
-      createdPosts: createdPost
+
+      res.render('posts/createdpost', {
+        foundpost: foundpost
+      })
     })
   })
-})
 
 router.post('/', function (req, res) {
   var newPost = new Post({
-    header: req.body.posts.header,
-    content: req.body.posts.content,
+    header: req.body.post.header,
+    content: req.body.post.content,
     // user: req.user.id
   })
 
