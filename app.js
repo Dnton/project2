@@ -67,5 +67,5 @@ app.use('/api/users', user_api_routes)
 
 app.use('/posts', post)
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000)
 console.log('Server running at http://localhost:' + port + '/')
