@@ -37,7 +37,7 @@ app.use(session({
   store: new MongoStore({
     url: process.env.MONGO_URI,
     autoReconnect: true,
-    mongoose_connection: mongoose.connection
+    mongooseConnection: mongoose.connection
   })
 }))
 
