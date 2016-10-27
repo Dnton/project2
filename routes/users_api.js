@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res) {
   User.create(req.body.user, function (err, newUser) {
-    res.redirect('/users')
+    res.redirect('/')
   })
 })
 

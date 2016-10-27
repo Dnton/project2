@@ -1,4 +1,5 @@
-<h2>USERNAMES HERE</h2>
+<h2>NEW USER?</h2>
+<h3>SIGN UP HERE</h3>
 <form method='post' action='/api/users'class="new-user">
   <div class="row">
     <div class="six columns">
@@ -13,10 +14,3 @@
     <input type="submit" value='Create New User'>
   </div>
 </form>
-
-
-<% allUsers.forEach(function(user) { %>
-  <li><%= user.local.name %></li>
-  <li><%= user.local.email %></li>
-  <li><%= user.local.password %></li>
-<% }) %>

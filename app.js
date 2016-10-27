@@ -60,7 +60,7 @@ var user_api_routes = require('./routes/users_api')
 var post = require('./routes/posts')
 
 // app.use('/', home)
-app.use('/users', user)
+app.use('/', user)
 app.use('/api/users', user_api_routes)
 app.use('/posts', post)
 

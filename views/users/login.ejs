@@ -1,5 +1,5 @@
-<h2>USERNAMES HERE</h2>
-<form method='post' action='/api/users'class="new-user">
+<h2>LOGIN HERE</h2>
+<form method='post' action='/'class="new-user">
   <div class="row">
     <div class="six columns">
       <input type="text" name="user[local][email]" id="user-email" placeholder="Your email" class="u-full-width">
@@ -7,6 +7,12 @@
     <div class="six columns">
       <input type="text" name="user[local][password]" id="user-password" placeholder="Your password" class="u-full-width">
     </div>
-    <input type="submit" value='Sign In'>
+    <input type="submit" value='Login'>
   </div>
 </form>
+
+<div class="form-group">
+  <p>
+    New user? <a href="/signup">Sign up</a>
+  </p>
+</div>

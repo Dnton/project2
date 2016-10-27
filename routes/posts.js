@@ -5,11 +5,12 @@ var Post = require('../models/post')
 
 var Comment = require('../models/comment')
 
-router.get('/', function (req, res) {
+
+router.get('/profile', function (req, res) {
   Post.find({}, function (err, allPost) {
     if (err) console.log(err)
     console.log(allPost)
-    res.render('posts/new', {
+    res.render('./users/profile', {
       allPosts: allPost
     })
   })
@@ -50,7 +51,7 @@ router.post('/', function (req, res) {
   var newPost = new Post({
     header: req.body.post.header,
     content: req.body.post.content,
-    // user: req.user.id
+    user: req.user.id
   })
 
   newPost.save(function (err, newPost) {
