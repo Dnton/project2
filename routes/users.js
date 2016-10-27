@@ -4,7 +4,7 @@ var passport = require('passport')
 // var LocalStrategy = require('passport-local').Strategy
 
 var User = require('../models/user')
-// var Property = require('../models/property')
+var Post = require('../models/post')
 
 function authCheck (req, res, next) {
   if (req.isAuthenticated()) {
@@ -40,11 +40,18 @@ router.route('/')
       }))
 
 router.get('/profile', function (req, res) {
-  res.render('./users/profile', {
-    message: req.flash('profileMessage'),
-    user: req.user
+
+    Post.find({}, function (err, allPost) {
+      if (err) console.log(err)
+
+    res.render('./users/profile', {
+      message: req.flash('profileMessage'),
+      user: req.user,
+      allPosts: allPost
+    })
   })
 })
+
 router.get('/logout', function (req, res) {
   req.logout()
   res.redirect('/')

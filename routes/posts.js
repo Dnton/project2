@@ -5,15 +5,8 @@ var Post = require('../models/post')
 
 var Comment = require('../models/comment')
 
-
-router.get('/profile', function (req, res) {
-  Post.find({}, function (err, allPost) {
-    if (err) console.log(err)
-    console.log(allPost)
-    res.render('./users/profile', {
-      allPosts: allPost
-    })
-  })
+router.get('/new', function (req, res) {
+  res.render('posts/new')
 })
 
 router.get('/:id', function (req, res) {
