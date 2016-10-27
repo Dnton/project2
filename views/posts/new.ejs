@@ -1,12 +1,43 @@
-<h2>NEW POST</h2>
-<form form method='POST' action='/posts' class="new-post">
-  <div class="row">
-    <div class="six columns">
-      <input type="text" name="post[header]" id="user-posts" placeholder="Your header" class="u-full-width">
-    </div>
-    <div class="six columns">
-      <input type="text" name="post[content]" id="posts-content" placeholder="Your content" class="u-full-width">
-    </div>
-    <input type="submit" value='Create New Post'>
+<style>
+    .input-lg {font-size:2rem;padding:3px 7px;}
+</style>
+
+<div class="container">
+	<div class="row">
+		<form class="form-horizontal" method='POST' action='/posts' class="new-post">
+<fieldset>
+
+<!-- Form Name -->
+<legend>New Post</legend>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Header</label>
+  <div class="col-md-6">
+  <input type="text" name="post[header]" id="user-posts" placeholder="" class="form-control input-md" type="text">
+
   </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="textinput">Content</label>
+  <div class="col-md-4">
+  <input type="text" name="post[content]" id="posts-content" placeholder="" class="form-control input-lg" >
+
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label" for="singlebutton"></label>
+  <div class="col-md-4">
+    <input type="submit" value='Create New Post'></button>
+  </div>
+</div>
+
+</fieldset>
 </form>
+
+	</div>
+</div>
