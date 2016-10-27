@@ -63,8 +63,12 @@ app.use(logger('dev'))
 
 var user = require('./routes/users')
 var user_api_routes = require('./routes/users_api')
-
 var post = require('./routes/posts')
+
+app.use(function (req, res, next) {
+ res.locals.user = req.user
+ next()
+})
 
 // app.use('/', home)
 app.use('/', user)

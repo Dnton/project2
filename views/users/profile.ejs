@@ -5,7 +5,7 @@
 <a class="btn btn-default btn-primary" href="/logout" role="button">Logout</a>
 
 <div>
-  <ul id="all-movie-boxes">
+  <ul id="all-post-boxes">
            <% foundpost.forEach(function(post) {
              %>
              <li>
@@ -13,5 +13,9 @@
              <a href="/posts/<%= post.id %>"><h4> <%= post.header %> </h4> </a>
             </li>
             </div>
+            <form method="POST" action="/posts/<%= post.id%>?_method=DELETE">
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit">Delete</button>
+          </form>
             <% }) %>
       </ul>

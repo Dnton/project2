@@ -65,4 +65,5 @@ router.delete('/:post/comments/:id', function (req, res) {
     }
   })
 })
+
 module.exports = router

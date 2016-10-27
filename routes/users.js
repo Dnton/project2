@@ -56,6 +56,18 @@ router.get('/profile', function (req, res) {
   })
 })
 
+router.delete('/posts/:id', function (req, res) {
+  Post.findByIdAndRemove(req.params.id, function (err, post) {
+    if (err) {
+      res.send('Error!')
+      console.log(err)
+    } else {
+      res.redirect('/profile')
+    }
+  })
+})
+
+
 router.get('/logout', function (req, res) {
   req.logout()
   res.redirect('/')
