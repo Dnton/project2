@@ -3,3 +3,7 @@
 <a class="btn btn-default btn-primary" href="/posts/new" role="button">New Post</a>
 
 <a class="btn btn-default btn-primary" href="/logout" role="button">Logout</a>
+
+<% foundpost.forEach(function(foundpost) { %>
+<li><%= foundpost.header %></li>
+<% }) %>
