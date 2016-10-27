@@ -13,32 +13,16 @@ router.get('/:id', function (req, res) {
   Post.findById({_id: req.params.id}, function (err, foundpost) {
     if (err) console.log(err)
 
-    Comment.find({post: req.params.id}, function (err, allComment) {
+    Comment.find({post: req.params.id}, function (err, postComment) {
       if (err) console.log(err)
-      console.log(allComment)
 
       res.render('posts/createdpost', {
         foundpost: foundpost,
-        allComments: allComment
+        postComments: postComment
       })
     })
   })
 })
-
-// router.get('/:id', function (req, res) {
-//   Post.findById(req.params.id)
-//     .populate('user_id', 'name')
-//     .exec(function (err, foundPost) {
-//       if (err) console.log(err)
-//       Comment.find({post_id: req.params.id}, function (err, allComment) {
-//         if (err) console.log(err)
-//         res.render('posts/createdpost', {
-//           foundPost: foundPost,
-//           allComments: allComment
-//         })
-//       })
-//     })
-// })
 
 router.post('/', function (req, res) {
   var newPost = new Post({
@@ -71,8 +55,14 @@ router.get('/error', function (req, res) {
   res.render('posts/error')
 })
 
-// router.get('/profile', function (req, res) {
-//   res.render('users/profile')
-// })
-
+router.delete('/:post/comments/:id', function (req, res) {
+  Comment.findByIdAndRemove(req.params.id, function (err, comment) {
+    if (err) {
+      res.send('Error!')
+      console.log(err)
+    } else {
+      res.redirect('/posts/' + req.params.post)
+    }
+  })
+})
 module.exports = router

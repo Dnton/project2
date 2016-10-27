@@ -16,7 +16,11 @@
   </form>
   </div>
 
-  <% allComments.forEach(function(comment) { %>
+  <% postComments.forEach(function(comment) { %>
     <li><%= comment.name %></li>
     <li><%= comment.content %></li>
+    <form method="POST" action="/posts/<%= foundpost.id%>/comments/<%= comment.id%>?_method=DELETE">
+  <input type="hidden" name="_method" value="DELETE">
+  <button type="submit">Delete</button>
+  </form>
   <% }) %>
