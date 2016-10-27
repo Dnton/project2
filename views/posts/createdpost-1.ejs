@@ -1,0 +1,26 @@
+  <h1><%= foundpost.header %></h1>
+  <li><%= foundpost.time %></li>
+  <li><%= foundpost.content %></li>
+
+  <div class="form-group" >
+    <form form action="/posts/<%= foundpost.id %>" method="POST" class="post-comments">
+      <div class="row">
+        <div class="six columns">
+          <input type="text" name="comment[name]" id="comment-name" placeholder="Your name" class="u-full-width">
+        </div>
+        <div class="six columns">
+          <input type="text" name="comment[content]" id="posts-content" placeholder="Your comment" class="u-full-width">
+        </div>
+        <input type="submit" value='Comment'>
+      </div>
+  </form>
+  </div>
+
+  <% postComments.forEach(function(comment) { %>
+    <li><%= comment.name %></li>
+    <li><%= comment.content %></li>
+    <form method="POST" action="/posts/<%= foundpost.id%>/comments/<%= comment.id%>?_method=DELETE">
+  <input type="hidden" name="_method" value="DELETE">
+  <button type="submit">Delete</button>
+  </form>
+  <% }) %>

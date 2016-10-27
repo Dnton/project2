@@ -50,7 +50,7 @@ router.get('/profile', function (req, res) {
 
     res.render('./users/profile', {
       message: req.flash('profileMessage'),
-      user: req.user,
+      user: req.user.local.name,
       foundpost: foundpost
     })
   })
