@@ -1,10 +1,5 @@
 <h1> HELLO <%= user.name %>! <h1>
 
-<% allPosts.forEach(function(post) { %>
- <li><%= post.header %></li>
- <li><%= post.content %></li>
-<% }) %>
-
 <a class="btn btn-default btn-primary" href="/posts/new" role="button">New Post</a>
 
 <a class="btn btn-default btn-primary" href="/logout" role="button">Logout</a>

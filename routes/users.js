@@ -41,13 +41,17 @@ router.route('/')
 
 router.get('/profile', function (req, res) {
 
-    Post.find({}, function (err, allPost) {
-      if (err) console.log(err)
+    Post.findById(req.params.id, function (err, foundpost) {
 
-    res.render('./users/profile', {
+      if(err) console.log(err)
+
+      console.log(foundpost)
+      console.log(req.params.id)
+
+      res.render('./users/profile', {
       message: req.flash('profileMessage'),
       user: req.user,
-      allPosts: allPost
+      foundpost: foundpost
     })
   })
 })
