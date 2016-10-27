@@ -36,7 +36,7 @@
                 <form role="form" action="/posts/<%= foundpost.id %>" method="POST" class="post-comments">
                     <div class="form-group">
                         <input type="text" name="comment[name]" id="comment-name" placeholder="Name" class="form-control">
-                      <textarea class="form-control" rows="3" name="comment[content]" id="posts-content" placeholder=""></textarea>
+                      <textarea class="form-control" rows="4" name="comment[content]" id="posts-content" placeholder=""></textarea>
                     </div>
                   <input type="submit" value='Comment'>
                 </form>
@@ -58,8 +58,9 @@
                     <%= comment.content %>
                     <br><br>
                     <form method="POST" action="/posts/<%= foundpost.id%>/comments/<%= comment.id%>?_method=DELETE">
+                    <a href="/posts/<%= foundpost.id %>/comments/<%= comment.id %>/edit" class="btn btn-default" role="button" aria-pressed="true">Edit</a>
                   <input type="hidden" name="_method" value="DELETE">
-                  <button type="submit">Delete</button>
+                  <button class="btn btn-default" type="submit">Delete</button>
                   </form>
                   <hr>
                   <% }) %>

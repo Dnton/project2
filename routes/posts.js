@@ -24,6 +24,36 @@ router.get('/:id', function (req, res) {
   })
 })
 
+router.get('/:post/comments/:id/edit', function (req, res) {
+  Post.findById(req.params.post, function (err, foundpost) {
+    if (err) console.log(err)
+
+    Comment.findById(req.params.id, function (err, editComment) {
+      if (err) console.log(err)
+
+      res.render('posts/postedit', {
+        foundpost: foundpost,
+        editComment: editComment
+      })
+    })
+  })
+})
+
+router.post('/:post/comments/:id/edit', function (req, res) {
+
+  Comment.findById(req.params.id, function (err, editComment) {
+    if (err) console.log(err)
+    editComment.content = req.body.comment.content
+
+    editComment.save(function (err, currentReview) {
+      if (err) console.log(err)
+      res.redirect('/posts/' + editComment.post)
+
+    })
+  })
+})
+
+
 router.post('/', function (req, res) {
   var newPost = new Post({
     header: req.body.post.header,

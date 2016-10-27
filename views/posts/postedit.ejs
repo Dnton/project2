@@ -1,0 +1,9 @@
+<div class="well">
+    <h4>Leave a Comment:</h4>
+        <div class="form-group">
+          <form class="comment-user" action="/posts/<%= foundpost.id %>/comments/<%= editComment.id %>/edit" method="POST">
+          <label for="inputcomments">Comments</label>
+        <textarea name="comment[content]" type="text" class="form-control" rows="4" ><%= editComment.content %></textarea>
+        <button class="btn btn-default" type="submit">Save</button>
+    </form>
+</div>
